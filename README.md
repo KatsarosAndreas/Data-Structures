@@ -82,50 +82,6 @@ typedef struct Okeanos {
 
 ---
 
-## Technical Implementation
-
-**File I/O & Parsing:**
-- CSV file reading with `fopen`, `fgets`, `fscanf`
-- Dynamic array allocation based on file line count
-- Robust parsing (handles delimiters, newlines, EOF)
-
-**Memory Management:**
-- Stack-allocated arrays (fixed-size after file scan)
-- No dynamic allocation (suitable for embedded systems)
-- Efficient struct packing (date + 7 float fields)
-
-**User Interface:**
-- Interactive menu system (`menu.c`)
-- Date input validation (YYYYMMDD format, range checking)
-- Formatted output (temperature, chemical measurements)
-
-**Code Organization:**
-- Modular function design (swap, partition, heapify)
-- Reusable CSV reader (`FileOpener`, `FileCounter`)
-- Separation of concerns (I/O, sorting, searching)
-
----
-
-## Performance Analysis
-
-**Sorting Performance:**
-
-| Algorithm | Time Complexity | Space | Stable | Use Case |
-|-----------|-----------------|-------|--------|----------|
-| **QuickSort** | O(n log n) avg | O(log n) | No | General-purpose |
-| **HeapSort** | O(n log n) worst | O(1) | No | Guaranteed performance |
-| **Counting Sort** | O(n + k) | O(k) | Yes | Integer keys, small range |
-| **Insertion Sort** | O(n²) | O(1) | Yes | Small/nearly-sorted data |
-
-**Search Performance:**
-
-| Algorithm | Complexity | Prerequisite | Advantage |
-|-----------|------------|--------------|-----------|
-| **Binary Search** | O(log n) | Sorted array | Guaranteed logarithmic |
-| **Interpolation** | O(log log n) avg | Sorted + uniform | Faster for uniform data |
-
-
-
 ## Code Files
 
 **Sorting:**
@@ -144,38 +100,6 @@ typedef struct Okeanos {
 
 **Data:**
 - `project.csv`: Oceanographic dataset (2000-2019)
-
----
-
-## Usage
-
-```bash
-# Compile with GCC
-gcc quicksort.c -o quicksort -lm
-gcc heapsort.c -o heapsort -lm
-gcc binarysearch.c -o binarysearch -lm
-gcc InterpolationSearch.c -o interpolation -lm
-
-# Run sorting
-./quicksort   # Sorts by date, displays sorted records
-./heapsort    # Heap-based sorting
-
-# Run searching
-./binarysearch
-# Prompts: Enter date (MM/DD/YYYY)
-# Output: Temperature for specified date
-
-./interpolation
-# Prompts: Enter date (YYYYMMDD)
-# Output: Temperature with interpolation-based search
-```
-
-**Data Format (project.csv):**
-```
-MM/DD/YYYY, temp, phosphate, silicate, nitrite, nitrate, salinity, oxygen
-1/15/2000, 18.5, 0.32, 5.2, 0.08, 2.1, 35.4, 6.8
-...
-```
 
 ---
 
